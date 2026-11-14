@@ -44,5 +44,20 @@ npm install pm2 -g && pm2 install pm2-logrotate
 # Start Server
 pm2 start server/server.js --name fryrvo-status
 ```
-
 Uptime Kuma is now running on all network interfaces (e.g. http://localhost:3001 or http://your-ip:3001).
+
+
+### Build
+```bash
+npm run build
+docker build -f docker/dockerfile --target release -t git.lgbt/fryrvo/status:latest .
+docker push git.lgbt/fryrvo/status:latest
+```
+
+### update on server
+```bash
+cd ~/fryrvo-status
+docker compose pull
+docker compose up -d
+docker compose logs -f
+```
